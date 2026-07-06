@@ -1,0 +1,152 @@
+.habits-list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+.habit-card {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-3);
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-sm);
+  padding: var(--space-3) var(--space-4);
+  transition: transform var(--transition-fast), box-shadow var(--transition-fast);
+}
+
+.habit-card__main {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  min-width: 0;
+  flex: 1;
+}
+
+.habit-card__icon {
+  font-size: 1.5rem;
+  line-height: 1;
+  flex-shrink: 0;
+}
+
+.habit-card__info {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+  min-width: 0;
+}
+
+.habit-card__name {
+  font-size: var(--text-base, 1rem);
+  font-weight: 600;
+  color: var(--color-text);
+  margin: 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.habit-card__meta {
+  font-size: var(--text-sm, 0.875rem);
+  color: var(--color-text-muted);
+  margin: 0;
+}
+
+.habit-card__controls {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  flex-shrink: 0;
+}
+
+.habit-card__toggle {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.5rem;
+  height: 2.5rem;
+  border-radius: var(--radius-full);
+  background: var(--color-surface-elevated);
+  border: 1px solid var(--color-border);
+  cursor: pointer;
+  position: relative;
+}
+
+.habit-card__toggle input[type="checkbox"] {
+  position: absolute;
+  opacity: 0;
+  width: 100%;
+  height: 100%;
+  cursor: pointer;
+  margin: 0;
+}
+
+.habit-card__toggle span {
+  opacity: 0.35;
+  transition: opacity var(--transition-fast);
+  pointer-events: none;
+}
+
+.habit-card__toggle:has(input:checked) span {
+  opacity: 1;
+}
+
+.habit-complete-btn {
+  padding: var(--space-2) var(--space-4);
+  border-radius: var(--radius-md);
+  background: var(--color-surface-elevated);
+  color: var(--color-text);
+  border: 1px solid var(--color-border);
+  font-weight: 600;
+  font-size: 0.875rem;
+  min-height: var(--touch-target);
+  transition: background var(--transition-fast), color var(--transition-fast), border-color var(--transition-fast);
+}
+
+.habit-complete-btn.is-completed {
+  background: var(--color-success);
+  color: #fff;
+  border-color: var(--color-success);
+}
+
+.habit-add-btn {
+  width: 100%;
+  padding: var(--space-3) var(--space-4);
+  border-radius: var(--radius-md);
+  background: var(--color-primary);
+  color: #fff;
+  font-weight: 600;
+  margin-top: var(--space-2);
+  transition: background var(--transition-fast), transform var(--transition-fast);
+}
+
+@media (prefers-color-scheme: dark) {
+  .habit-add-btn {
+    color: #0F1311;
+  }
+
+  .habit-complete-btn.is-completed {
+    color: #0F1311;
+  }
+}
+
+.habit-add-btn:active {
+  transform: scale(0.98);
+  background: var(--color-primary-light);
+}
+
+@media (prefers-color-scheme: dark) {
+  .habit-card__toggle:has(input:checked) span {
+    filter: brightness(1.2);
+  }
+}
+
+:root {
+  --text-xs: 0.75rem;
+  --text-sm: 0.875rem;
+  --text-base: 1rem;
+  --text-lg: 1.125rem;
+  --text-xl: 1.25rem;
+}
