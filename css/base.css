@@ -49,9 +49,13 @@ img, svg {
   display: block;
 }
 
-/* Ensure [hidden] truly hides panels regardless of display class */
-[hidden] {
+/* Ensure [hidden] truly hides panels, but active panel overrides it */
+.panel[hidden] {
   display: none !important;
+}
+
+.panel.is-active {
+  display: flex !important;
 }
 
 .visually-hidden {
