@@ -49,6 +49,11 @@ img, svg {
   display: block;
 }
 
+/* Ensure [hidden] truly hides panels regardless of display class */
+[hidden] {
+  display: none !important;
+}
+
 .visually-hidden {
   position: absolute;
   width: 1px;
