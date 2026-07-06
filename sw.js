@@ -4,28 +4,31 @@
 var CACHE_NAME = 'ketolife-v1';
 
 // Static assets used by the app shell (Cache-First)
+// Relative paths so the precache works under any subpath (e.g. GitHub Pages /keto-life-pro/).
 var STATIC_ASSETS = [
-  '/',
-  'index.html',
-  'manifest.json',
-  'css/tokens.css',
-  'css/base.css',
-  'css/layout.css',
-  'css/dashboard.css',
-  'css/habits.css',
-  'css/meals.css',
-  'js/time.js',
-  'js/db.js',
-  'js/notifications.js',
-  'js/data/i18n.js',
-  'js/data/keto-foods.js',
-  'js/components/meals.js',
-  'js/components/dashboard.js',
-  'js/components/habits.js',
-  'js/app.js',
-  'icons/icon-192.png',
-  'icons/icon-512.png',
-  'icons/favicon.svg'
+  './',
+  './index.html',
+  './manifest.json',
+  './css/tokens.css',
+  './css/base.css',
+  './css/layout.css',
+  './css/dashboard.css',
+  './css/habits.css',
+  './css/meals.css',
+  './js/time.js',
+  './js/db.js',
+  './js/notifications.js',
+  './js/data/i18n.js',
+  './js/data/keto-foods.js',
+  './js/components/meals.js',
+  './js/components/dashboard.js',
+  './js/components/habits.js',
+  './js/components/foods.js',
+  './js/components/more.js',
+  './js/app.js',
+  './icons/icon-192.png',
+  './icons/icon-512.png',
+  './icons/favicon.svg'
 ];
 
 // Precache static assets on install
@@ -61,9 +64,16 @@ self.addEventListener('activate', function (event) {
 
 // Decide if a request is part of the static app shell
 function isStaticAsset(request) {
-  var url = request.url;
+  var url = new URL(request.url);
+  var path = url.pathname;
+  // Strip the GitHub Pages repo subpath if present, then compare to relative assets.
+  var repoPath = '/keto-life-pro/';
+  var localPath = path;
+  if (path.indexOf(repoPath) === 0) {
+    localPath = path.substring(repoPath.length - 1);
+  }
   return STATIC_ASSETS.some(function (asset) {
-    return url.indexOf(asset) !== -1;
+    return localPath === asset || path.indexOf(asset) !== -1;
   });
 }
 
