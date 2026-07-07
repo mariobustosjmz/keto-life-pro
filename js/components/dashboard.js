@@ -429,8 +429,7 @@
     const existing = title ? title.outerHTML : `<h2 class="panel-title" data-i18n="nav.today">${t('nav.today')}</h2>`;
     panel.innerHTML = existing + dashboardTemplate();
 
-    // Ensure active panel layout applies to #panel-today
-    panel.classList.add('is-active');
+
 
     // Re-translate static placeholders inside the dashboard
     if (window.translateDOM) window.translateDOM();

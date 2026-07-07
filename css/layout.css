@@ -67,11 +67,22 @@
 .panel {
   display: none;
   animation: fadeIn var(--transition-base);
+  width: 100%;
+  min-width: 0;
 }
 
 .panel.is-active {
   display: flex;
   flex-direction: column;
+}
+
+.main {
+  grid-area: main;
+  overflow-y: auto;
+  overflow-x: hidden;
+  padding: var(--space-4);
+  scroll-behavior: smooth;
+  min-width: 0;
 }
 
 .panel-title {

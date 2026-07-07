@@ -123,7 +123,7 @@
 
     buildUI() {
       this.container.innerHTML = '';
-      this.container.className = 'meals-panel';
+      this.container.classList.add('meals-panel');
 
       const header = document.createElement('header');
       header.className = 'meals-panel__header';

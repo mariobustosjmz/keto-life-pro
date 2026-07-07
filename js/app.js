@@ -87,6 +87,9 @@
   function showPanel(id) {
     const panelId = id.startsWith('panel-') ? id : `panel-${id}`;
     const sectionId = panelId.replace('panel-', '');
+    const targetPanel = document.getElementById(panelId);
+    if (!targetPanel) return;
+
     document.querySelectorAll('.panel').forEach(panel => {
       const isActive = panel.id === panelId;
       panel.classList.toggle('is-active', isActive);

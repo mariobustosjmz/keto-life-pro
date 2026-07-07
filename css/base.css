@@ -49,13 +49,32 @@ img, svg {
   display: block;
 }
 
-/* Ensure [hidden] truly hides panels, but active panel overrides it */
+/* Robust panel visibility: only the active panel is rendered, all others are hidden */
+.panel,
 .panel[hidden] {
   display: none !important;
 }
 
 .panel.is-active {
   display: flex !important;
+}
+
+/* Prevent horizontal overflow on narrow viewports */
+html, body {
+  overflow-x: hidden;
+  max-width: 100%;
+}
+
+/* Ensure images and long words never break layout */
+img, svg, video, canvas, iframe {
+  max-width: 100%;
+  display: block;
+}
+
+/* Prevent long content from forcing horizontal scroll */
+* {
+  word-wrap: break-word;
+  overflow-wrap: break-word;
 }
 
 .visually-hidden {
