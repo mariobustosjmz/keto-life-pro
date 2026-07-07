@@ -32,7 +32,9 @@
     }
   }
 
-  function scheduleReminder(id, title, body, delay, icon = '🔔') {
+  const BELL_ICON = '/icons/icon-192x192.png';
+
+  function scheduleReminder(id, title, body, delay, icon = BELL_ICON) {
     cancelReminder(id);
     if (!isSupported() || Notification.permission !== 'granted') return;
 
@@ -45,7 +47,7 @@
     scheduledReminders.set(id, timer);
   }
 
-  function showNotification(title, body, icon = '🔔') {
+  function showNotification(title, body, icon = BELL_ICON) {
     if (!isSupported() || Notification.permission !== 'granted') return;
     try {
       new Notification(title, { body, icon });
@@ -57,7 +59,7 @@
   function sendTest(title, body) {
     ensurePermission().then(granted => {
       if (granted) {
-        showNotification(title, body, '🔔');
+        showNotification(title, body);
       } else {
         alert(body || title);
       }
