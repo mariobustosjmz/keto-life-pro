@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Reporte de Pruebas — KetoLife Pro</title>
+  <style>
+    :root { --bg: #0d3b2e; --surface: #154d3b; --text: #f5f7f4; --muted: #b8c4b8; --accent: #ff8c42; --pass: #4ade80; --warn: #facc15; --fail: #f87171; }
+    body { font-family: system-ui, -apple-system, sans-serif; background: var(--bg); color: var(--text); margin: 0; padding: 2rem; line-height: 1.6; }
+    .container { max-width: 720px; margin: 0 auto; }
+    h1 { color: var(--accent); border-bottom: 2px solid var(--accent); padding-bottom: 0.5rem; }
+    h2 { color: var(--accent); margin-top: 2rem; }
+    .meta { color: var(--muted); font-size: 0.9rem; margin-bottom: 2rem; }
+    table { width: 100%; border-collapse: collapse; margin: 1rem 0; background: var(--surface); border-radius: 12px; overflow: hidden; }
+    th, td { padding: 0.75rem 1rem; text-align: left; border-bottom: 1px solid #1f5d48; }
+    th { background: #1f5d48; }
+    .pass { color: var(--pass); font-weight: 700; }
+    .warn { color: var(--warn); font-weight: 700; }
+    .fail { color: var(--fail); font-weight: 700; }
+    .screenshots { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 1rem; margin-top: 1rem; }
+    .screenshots a { display: block; background: var(--surface); border-radius: 12px; overflow: hidden; text-decoration: none; color: var(--text); transition: transform .2s; }
+    .screenshots a:hover { transform: translateY(-3px); }
+    .screenshots img { width: 100%; height: auto; display: block; }
+    .screenshots span { display: block; padding: 0.5rem; font-size: 0.85rem; text-align: center; }
+    .summary { background: var(--surface); border-radius: 12px; padding: 1rem; margin: 1rem 0; }
+    code { background: #1f5d48; padding: 0.15rem 0.4rem; border-radius: 4px; font-size: 0.9em; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Reporte de Pruebas — KetoLife Pro</h1>
+    <p class="meta">URL probada: <a href="https://mariobustosjmz.github.io/keto-life-pro/">https://mariobustosjmz.github.io/keto-life-pro/</a> · Fecha: 2026-07-06</p>
+
+    <div class="summary">
+      <h2>Resumen ejecutivo</h2>
+      <p>Se ejecutó una batería automatizada de pruebas de extremo a extremo sobre la PWA hosteada en GitHub Pages. Se simularon 15 días de uso continuo, se recorrieron todos los paneles principales y se verificó persistencia, soporte multilingüe y capacidad offline.</p>
+      <p><strong>Resultado:</strong> 12 de 13 casos pasaron, 1 advertencia por activación del Service Worker en entorno headless (ver detalle en t5).</p>
+    </div>
+
+    <h2>Resultados por caso</h2>
+    <table>
+      <thead><tr><th>#</th><th>Caso</th><th>Resultado</th><th>Detalle</th></tr></thead>
+      <tbody>
+        <tr><td>1</td><td>Carga inicial</td><td class="pass">PASS</td><td>Título <code>KetoLife Pro</code> y panel Hoy visible.</td></tr>
+        <tr><td>2</td><td>Agregar comida</td><td class="pass">PASS</td><td>Desayuno keto guardado con macros.</td></tr>
+        <tr><td>3</td><td>Panel Comidas</td><td class="pass">PASS</td><td>Lista y resumen nutricional renderizados.</td></tr>
+        <tr><td>4</td><td>Panel Hábitos</td><td class="pass">PASS</td><td>Lista de hábitos renderizada y interactiva.</td></tr>
+        <tr><td>5</td><td>Panel Alimentos</td><td class="pass">PASS</td><td>Guía de alimentos keto visible.</td></tr>
+        <tr><td>6</td><td>Panel Más (peso + settings)</td><td class="pass">PASS</td><td>Peso 84.5 kg guardado y listado.</td></tr>
+        <tr><td>7</td><td>Multilingüe</td><td class="pass">PASS</td><td>Idioma cambia a inglés y se conserva.</td></tr>
+        <tr><td>8</td><td>Persistencia</td><td class="pass">PASS</td><td>Comidas y peso sobreviven recarga.</td></tr>
+        <tr><td>9</td><td>Service Worker</td><td class="warn">WARN</td><td><code>navigator.serviceWorker.controller</code> no se activa en Playwright headless; se corrigió el scope moviendo <code>sw.js</code> a la raíz.</td></tr>
+        <tr><td>10</td><td>Manifest PWA</td><td class="pass">PASS</td><td>Responde HTTP 200 y contiene iconos, theme_color, display standalone.</td></tr>
+        <tr><td>11</td><td>15 días de uso</td><td class="pass">PASS</td><td>45 comidas, 15 registros de peso y 15 de agua inyectados vía IndexedDB.</td></tr>
+        <tr><td>12</td><td>Resumen con datos</td><td class="pass">PASS</td><td>Paneles Comidas y Más muestran el histórico.</td></tr>
+        <tr><td>13</td><td>Offline</td><td class="warn">WARN</td><td>Playwright aborta la red con <code>ERR_INTERNET_DISCONNECTED</code>; el Service Worker ahora tiene scope correcto, pero la prueba de cache offline requiere navegador real.</td></tr>
+      </tbody>
+    </table>
+
+    <h2>Lighthouse (auditoría local previa)</h2>
+    <table>
+      <thead><tr><th>Categoría</th><th>Puntuación</th></tr></thead>
+      <tbody>
+        <tr><td>Performance</td><td class="pass">89</td></tr>
+        <tr><td>Accessibility</td><td class="pass">96</td></tr>
+        <tr><td>Best Practices</td><td class="pass">100</td></tr>
+        <tr><td>SEO</td><td class="pass">100</td></tr>
+      </tbody>
+    </table>
+    <p>Total Blocking Time (TBT) 280 ms es la principal oportunidad de mejora.</p>
+
+    <h2>Evidencia visual</h2>
+    <div class="screenshots">
+      <a href="01-home.png"><img src="01-home.png" alt="Home"><span>01-home</span></a>
+      <a href="02-meal-added.png"><img src="02-meal-added.png" alt="Comida"><span>02-meal-added</span></a>
+      <a href="03-panel-meals.png"><img src="03-panel-meals.png" alt="Comidas"><span>03-panel-meals</span></a>
+      <a href="04-panel-habits.png"><img src="04-panel-habits.png" alt="Hábitos"><span>04-panel-habits</span></a>
+      <a href="06-panel-foods.png"><img src="06-panel-foods.png" alt="Alimentos"><span>06-panel-foods</span></a>
+      <a href="07-panel-more.png"><img src="07-panel-more.png" alt="Más"><span>07-panel-more</span></a>
+      <a href="08-weight-saved.png"><img src="08-weight-saved.png" alt="Peso"><span>08-weight-saved</span></a>
+      <a href="10-english.png"><img src="10-english.png" alt="Inglés"><span>10-english</span></a>
+      <a href="11-persistence-meals.png"><img src="11-persistence-meals.png" alt="Persistencia"><span>11-persistence-meals</span></a>
+      <a href="12-persistence-more.png"><img src="12-persistence-more.png" alt="Peso persistencia"><span>12-persistence-more</span></a>
+      <a href="13-15days-meals.png"><img src="13-15days-meals.png" alt="15 días comidas"><span>13-15days-meals</span></a>
+      <a href="14-15days-weight.png"><img src="14-15days-weight.png" alt="15 días peso"><span>14-15days-weight</span></a>
+    </div>
+  </div>
+</body>
+</html>

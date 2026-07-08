@@ -288,7 +288,7 @@
         const empty = document.createElement('div');
         empty.className = 'empty-state';
         empty.innerHTML = `
-          <div class="empty-state__icon" aria-hidden="true">🍽️</div>
+          <div class="empty-state__icon" aria-hidden="true"><svg viewBox="0 0 24 24" width="48" height="48" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 7v9a3 3 0 0 0 3 3h12a3 3 0 0 0 3-3V7"/><path d="M7 7V5a2 2 0 0 1 2-2h6a2 2 0 0 1 2 2v2"/><path d="M12 14v-2"/></svg></div>
           <p class="empty-state__title">${t('meals.emptyTitle')}</p>
           <p class="empty-state__text">${t('meals.emptyText')}</p>
         `;

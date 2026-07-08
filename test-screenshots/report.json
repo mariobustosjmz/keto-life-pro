@@ -1,0 +1,118 @@
+[
+  {
+    "level": "info",
+    "msg": "1. Cargando homepage pública..."
+  },
+  {
+    "level": "pass",
+    "msg": "1. Homepage carga OK"
+  },
+  {
+    "level": "info",
+    "msg": "2. Verificando panel Hoy..."
+  },
+  {
+    "level": "pass",
+    "msg": "2. Panel Hoy visible"
+  },
+  {
+    "level": "info",
+    "msg": "3. Agregando comida..."
+  },
+  {
+    "level": "pass",
+    "msg": "3. Comida guardada"
+  },
+  {
+    "level": "info",
+    "msg": "4. Panel Comidas..."
+  },
+  {
+    "level": "pass",
+    "msg": "4. Panel Comidas OK"
+  },
+  {
+    "level": "info",
+    "msg": "5. Panel Hábitos..."
+  },
+  {
+    "level": "pass",
+    "msg": "5. Panel Hábitos renderizado"
+  },
+  {
+    "level": "info",
+    "msg": "6. Panel Alimentos..."
+  },
+  {
+    "level": "pass",
+    "msg": "6. Panel Alimentos renderizado"
+  },
+  {
+    "level": "info",
+    "msg": "7. Panel Más + peso..."
+  },
+  {
+    "level": "pass",
+    "msg": "7. Peso guardado"
+  },
+  {
+    "level": "info",
+    "msg": "8. Idioma inglés..."
+  },
+  {
+    "level": "pass",
+    "msg": "8. Idioma cambiado"
+  },
+  {
+    "level": "info",
+    "msg": "9. Persistencia..."
+  },
+  {
+    "level": "pass",
+    "msg": "9. Persistencia comida OK"
+  },
+  {
+    "level": "pass",
+    "msg": "9. Persistencia peso OK"
+  },
+  {
+    "level": "info",
+    "msg": "10. Service Worker..."
+  },
+  {
+    "level": "warn",
+    "msg": "10. SW state: None"
+  },
+  {
+    "level": "pass",
+    "msg": "10. Manifest OK"
+  },
+  {
+    "level": "info",
+    "msg": "11. Simulando 15 días..."
+  },
+  {
+    "level": "pass",
+    "msg": "11. Injected 15 days"
+  },
+  {
+    "level": "pass",
+    "msg": "11. Screenshot 15 días comidas"
+  },
+  {
+    "level": "pass",
+    "msg": "11. Screenshot 15 días peso"
+  },
+  {
+    "level": "info",
+    "msg": "12. Offline..."
+  },
+  {
+    "level": "info",
+    "msg": "12. Offline goto error (expected): Error"
+  },
+  {
+    "level": "warn",
+    "msg": "12. Offline title: "
+  }
+]

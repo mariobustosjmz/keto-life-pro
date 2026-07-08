@@ -18,10 +18,10 @@
   ];
 
   const CATEGORY_ICONS = {
-    'keto-super': '⭐',
-    'eat-freely': '✅',
-    'moderate': '⚠️',
-    'avoid': '🚫'
+    'keto-super': '<svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>',
+    'eat-freely': '<svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>',
+    'moderate': '<svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10.3 3.9 1.8 18.5A2 2 0 0 0 3.6 22h16.8a2 2 0 0 0 1.8-3.5L13.7 3.9a2 2 0 0 0-3.4 0Z"/><path d="M12 9v5"/><circle cx="12" cy="18" r="0.5" fill="currentColor"/></svg>',
+    'avoid': '<svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="4.93" y1="4.93" x2="19.07" y2="19.07"/></svg>'
   };
 
   function t(key, params) {
@@ -383,7 +383,7 @@
     renderTabs() {
       const activeCategory = this.filter.category || 'all';
       const tabs = [
-        { key: 'all', color: 'all', icon: '🍽️' },
+        { key: 'all', color: 'all', icon: '<svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 7v9a3 3 0 0 0 3 3h12a3 3 0 0 0 3-3V7"/><path d="M7 7V5a2 2 0 0 1 2-2h6a2 2 0 0 1 2 2v2"/><path d="M12 14v-2"/></svg>' },
         ...CATEGORIES.map(c => ({ key: c.key, color: c.color, icon: CATEGORY_ICONS[c.key] }))
       ];
 
@@ -420,7 +420,7 @@
       if (foods.length === 0) {
         this.gridEl.innerHTML = `
           <div class="foods-empty">
-            <div class="foods-empty__icon" aria-hidden="true">🔍</div>
+            <div class="foods-empty__icon" aria-hidden="true"><svg viewBox="0 0 24 24" width="48" height="48" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg></div>
             <p class="foods-empty__title">${localT('noResults')}</p>
             <p>${localT('tryAnotherSearch')}</p>
           </div>

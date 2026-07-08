@@ -8,6 +8,12 @@ const TimeEngine = {
     try {
       const sim = localStorage.getItem('ketoSimDate');
       if (sim) {
+        const parsed = new Date(sim);
+        if (!Number.isNaN(parsed.getTime())) {
+          const now = new Date();
+          return new Date(parsed.getFullYear(), parsed.getMonth(), parsed.getDate(), now.getHours(), now.getMinutes(), now.getSeconds(), now.getMilliseconds());
+        }
+        // Fallback: try legacy YYYY-MM-DD format
         const [y, m, d] = sim.split('-').map(Number);
         if (y && m && d) {
           const now = new Date();

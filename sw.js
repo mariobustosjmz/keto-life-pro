@@ -1,7 +1,7 @@
 // KetoLife Pro — Service Worker (ES5-compatible, Cache-First + Network-First)
 'use strict';
 
-const CACHE_NAME = 'ketolife-v6';
+const CACHE_NAME = 'ketolife-v7';
 
 // Static assets used by the app shell (Cache-First)
 // Relative paths so the precache works under any subpath (e.g. GitHub Pages /keto-life-pro/).

@@ -119,8 +119,8 @@
     await window.db.put(HABIT_STORE, { ...habit, reminderDate: todayKey() });
     window.pubsub.emit('habitChange', { habit, action: wasCompleted ? 'uncomplete' : 'complete' });
 
-    if (habit.completed && habit.reminder) {
-      window.notifications.cancelReminder(habit.id);
+    if (habit.completed && habit.reminder && typeof window.notifications !== 'undefined' && window.notifications) {
+      try { window.notifications.cancelReminder(habit.id); } catch (e) {}
     }
   }
 
@@ -164,7 +164,8 @@
   }
 
   function scheduleHabitReminder(habit) {
-    if (!window.notifications || !habit.reminder || habit.completed) return;
+    if (!habit || !habit.reminder || habit.completed) return;
+    if (typeof window.notifications === 'undefined' || !window.notifications) return;
 
     const now = window.TimeEngine ? window.TimeEngine.getToday() : new Date();
     const [h, m] = habit.time.split(':').map(Number);
@@ -178,7 +179,9 @@
     const label = window.i18n.t(`habits.${habit.name}`);
     const body = window.i18n.t('habits.reminderBody', { time: habit.time });
 
-    window.notifications.scheduleReminder(habit.id, label, body, delay, BELL_ICON);
+    try {
+      window.notifications.scheduleReminder(habit.id, label, body, delay, BELL_ICON);
+    } catch (e) {}
   }
 
   async function renderHabits() {
