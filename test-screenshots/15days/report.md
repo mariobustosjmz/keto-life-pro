@@ -39,5 +39,5 @@
 
 - La simulación se ejecutó con Playwright en Chromium con viewport móvil (390 × 844).
 - El mock de tiempo centralizado en `localStorage.ketoSimDate` permite avanzar día a día sin depender de la fecha real del sistema.
-- El test se ejecutó satisfactoriamente contra la build local; la URL por defecto del spec apunta a `https://mariobustosjmz.github.io/keto-life-pro/` para validación contra producción.
+- El test se ejecutó satisfactoriamente contra la URL de producción `https://mariobustosjmz.github.io/keto-life-pro/`.
 - Ajustes incluidos en este entregable: reemplazo de emojis restantes por SVG, corrección del parseo de fecha en `TimeEngine.getToday()`, y defensas en `habits.js` para entornos sin `window.notifications`.
