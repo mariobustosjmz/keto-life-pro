@@ -1,0 +1,12 @@
+{
+  "name": "keto-life-pro",
+  "version": "1.0.0",
+  "description": "KetoLife Pro PWA smoke tests",
+  "scripts": {
+    "test:smoke": "npx playwright test tests/smoke-15days.spec.js",
+    "test:ui": "npx playwright test --ui"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.45.0"
+  }
+}
