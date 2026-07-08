@@ -69,14 +69,13 @@
   function scheduleHabitRemindersFromDB() {
     if (!window.db || !window.habits) return;
     window.db.getAll('habits').then(habits => {
-      const now = Date.now();
-      const today = new Date().toISOString().split('T')[0];
+      const now = (window.TimeEngine ? window.TimeEngine.getToday() : new Date());
+      const today = window.TimeEngine ? window.TimeEngine.todayKey() : now.toISOString().split('T')[0];
       habits.forEach(habit => {
         if (!habit.reminder || habit.completed) return;
         const [h, m] = (habit.time || '00:00').split(':').map(Number);
-        const target = new Date();
-        target.setHours(h, m, 0, 0);
-        let delay = target.getTime() - now;
+        const target = new Date(now.getFullYear(), now.getMonth(), now.getDate(), h, m, 0, 0);
+        let delay = target.getTime() - now.getTime();
         if (delay <= 0) delay += 24 * 60 * 60 * 1000;
         const title = window.i18n.t(`habits.${habit.name}`);
         const body = window.i18n.t('habits.reminderBody', { time: habit.time });

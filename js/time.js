@@ -2,6 +2,29 @@
 // Pure JS, no external dependencies. Uses local time.
 
 const TimeEngine = {
+  // Return a Date object for "now". If localStorage has a simulated date (ketoSimDate: YYYY-MM-DD),
+  // combine that date with the current local time so the day advances while the wall-clock hour stays real.
+  getToday() {
+    try {
+      const sim = localStorage.getItem('ketoSimDate');
+      if (sim) {
+        const [y, m, d] = sim.split('-').map(Number);
+        if (y && m && d) {
+          const now = new Date();
+          return new Date(y, m - 1, d, now.getHours(), now.getMinutes(), now.getSeconds(), now.getMilliseconds());
+        }
+      }
+    } catch (e) {
+      console.error('Error reading ketoSimDate:', e);
+    }
+    return new Date();
+  },
+
+  // ISO date string (YYYY-MM-DD) for the simulated or real today
+  todayKey() {
+    return this.getToday().toISOString().split('T')[0];
+  },
+
   // Convert "HH:MM" to minutes from midnight
   toMinutes(timeStr) {
     if (!timeStr || typeof timeStr !== 'string') return 0;
@@ -19,7 +42,7 @@ const TimeEngine = {
 
   // Get current time as minutes from midnight
   nowMinutes() {
-    const now = new Date();
+    const now = this.getToday();
     return now.getHours() * 60 + now.getMinutes();
   },
 
@@ -56,7 +79,8 @@ const TimeEngine = {
   },
 
   // Compute fasting / eating window status given settings and current time
-  getFastStatus(settings, now = new Date()) {
+  getFastStatus(settings, now = null) {
+    if (!now) now = this.getToday();
     const fastStart = this.toMinutes(settings.fastStart || '10:00');
     const fastEnd = this.toMinutes(settings.fastEnd || '18:00');
     const minutes = now.getHours() * 60 + now.getMinutes();
@@ -151,7 +175,8 @@ const TimeEngine = {
   },
 
   // Get next scheduled reminder times for today
-  getNextReminderTimes(settings, now = new Date()) {
+  getNextReminderTimes(settings, now = null) {
+    if (!now) now = this.getToday();
     const minutes = now.getHours() * 60 + now.getMinutes();
     const events = [
       { key: 'fastStart', label: 'fastStart', time: settings.fastStart || '10:00' },

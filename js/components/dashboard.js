@@ -13,7 +13,7 @@
   // --- Helpers ---------------------------------------------------------------
 
   function todayISODate() {
-    return new Date().toISOString().split('T')[0];
+    return window.TimeEngine ? window.TimeEngine.todayKey() : new Date().toISOString().split('T')[0];
   }
 
   function isToday(isoDateOrString) {
@@ -369,7 +369,7 @@
   // --- Interactions -----------------------------------------------------------
 
   async function addWater(amount) {
-    const now = new Date();
+    const now = window.TimeEngine ? window.TimeEngine.getToday() : new Date();
     const item = {
       amount: Number(amount) || 250,
       date: now.toISOString(),

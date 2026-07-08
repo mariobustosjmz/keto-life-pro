@@ -17,7 +17,7 @@
   }
 
   function todayISO() {
-    return new Date().toISOString().split('T')[0];
+    return window.TimeEngine ? window.TimeEngine.todayKey() : new Date().toISOString().split('T')[0];
   }
 
   function formatDateShort(iso) {
@@ -299,7 +299,7 @@
       weight: safeInputNumber(fd.get('weight')),
       date: fd.get('date') || todayISO(),
       note: fd.get('note') || '',
-      createdAt: new Date().toISOString()
+      createdAt: (window.TimeEngine ? window.TimeEngine.getToday() : new Date()).toISOString()
     };
 
     try {
@@ -385,7 +385,7 @@
         image,
         date: fd.get('date') || todayISO(),
         description: fd.get('description') || '',
-        createdAt: new Date().toISOString()
+        createdAt: (window.TimeEngine ? window.TimeEngine.getToday() : new Date()).toISOString()
       };
       await window.db.add(EVIDENCE_STORE, record);
       window.pubsub.emit('evidenceAdded', record);

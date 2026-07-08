@@ -15,7 +15,7 @@
   }
 
   function getToday() {
-    return formatDate(new Date());
+    return formatDate(window.TimeEngine ? window.TimeEngine.getToday() : new Date());
   }
 
   function parseInputFloat(value) {
@@ -353,7 +353,7 @@
     }
 
     currentTime() {
-      const now = new Date();
+      const now = window.TimeEngine ? window.TimeEngine.getToday() : new Date();
       return `${String(now.getHours()).padStart(2, '0')}:${String(now.getMinutes()).padStart(2, '0')}`;
     }
 
